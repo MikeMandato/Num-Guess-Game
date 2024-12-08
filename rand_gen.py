@@ -13,28 +13,30 @@ def NumGame(min, max):
     while True:
         try:
             UserGuess = int(input("Enter your guess:"))
-            # What would attempts start at if it was not stated above on line 11?  
-            attempts += 1
-            if UserGuess == GameInt:
-                print(f"Congrats!!! \nYou guessed '{GameInt}' in {attempts} attempts!")
-                break
-            elif abs(UserGuess - GameInt) <= 10:
-                if UserGuess < GameInt:
-                    print("SUPER CLOSE! But still too low")
-                else:
-                    print("SUPER CLOSE! But still too high")
-            elif abs(UserGuess - GameInt) <= 100:
-                if UserGuess < GameInt:
-                    print("Close, but still too low!")
-                else:
-                    print("Close, but still too high")
-            else:
-                if UserGuess < GameInt:
-                    print("Wayyy too low")
-                else:
-                    print("Wayyy too high")
         except ValueError:
-            print("Ooops. Wrong input, try again.")
+            print(f"Ooops, you entered {UserGuess}, which is not a number. Try again.")
+            continue
+        # What would attempts start at if it was not stated above on line 11?  
+        attempts += 1
+        if UserGuess == GameInt:
+            print(f"Congrats!!! \nYou guessed '{GameInt}' in {attempts} attempts!")
+            break
+        elif abs(UserGuess - GameInt) <= 10:
+            if UserGuess < GameInt:
+                print("SUPER CLOSE! But still too low")
+            else:
+                print("SUPER CLOSE! But still too high")
+        elif abs(UserGuess - GameInt) <= 100:
+            if UserGuess < GameInt:
+                print("Close, but still too low!")
+            else:
+                print("Close, but still too high")
+        else:
+            if UserGuess < GameInt:
+                print("Wayyy too low")
+            else:
+                print("Wayyy too high")
+
     PlayAgain = input("Would you like to play again? (y/n): ").lower()
     if PlayAgain[0] == "n":
         print("\nThanks for playing!\n")
