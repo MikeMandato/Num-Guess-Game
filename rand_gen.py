@@ -1,5 +1,11 @@
 import random
 
+SUPER_CLOSE_MESSAGE = "SUPER CLOSE! But still too {0}"
+SUPER_CLOSE_PROXIMITY = 10
+CLOSE_MESSAGE = "Close, but still too {0}!"
+CLOSE_PROXIMITY = 100
+FAR_AWAY_MESSAGE = "Wayyy too {0}"
+
 
 def print_proximity_based_message(msg: str, guess_proximity: int) -> None:
     print(msg.format("low" if guess_proximity < 0 else "high"))
@@ -15,16 +21,19 @@ def handle_end_game(number_to_guess, attempts) -> bool:
         return False
     return True
 
+def handle_guess_proximity_message(guess_proximity: str) -> None:
+    if abs(guess_proximity) <= SUPER_CLOSE_PROXIMITY:
+        print_proximity_based_message(SUPER_CLOSE_MESSAGE, guess_proximity)
+    elif abs(guess_proximity) <= CLOSE_PROXIMITY:
+        print_proximity_based_message(CLOSE_MESSAGE, guess_proximity)
+    else:
+        print_proximity_based_message(FAR_AWAY_MESSAGE, guess_proximity)
+
 def number_guessing_game(min: int, max: int) -> None:
     print("Welcome to the number game :)")
     print(f"Enter a number between {min} and {max}!")
 
     number_to_guess, attempts = get_game_variables(min, max)
-
-    # Define game constants
-    super_close_message, super_close_proximity = "SUPER CLOSE! But still too {0}", 10
-    close_message, close_proximity = "Close, but still too {0}!", 100
-    far_away_message = "Wayyy too {0}"
 
     while True:
         attempts += 1
@@ -42,13 +51,8 @@ def number_guessing_game(min: int, max: int) -> None:
                 return
             number_to_guess, attempts = get_game_variables(min, max)
             continue
-        
-        if abs(guess_proximity) <= super_close_proximity:
-            print_proximity_based_message(super_close_message, guess_proximity)
-        elif abs(guess_proximity) <= close_proximity:
-            print_proximity_based_message(close_message, guess_proximity)
-        else:
-            print_proximity_based_message(far_away_message, guess_proximity)
+
+        handle_guess_proximity_message(guess_proximity)
 
 
 #if user_guess != int:
