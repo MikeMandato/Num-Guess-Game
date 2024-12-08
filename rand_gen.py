@@ -22,22 +22,23 @@ def number_guessing_game(min: int, max: int):
             print(f"Ooops, you entered {user_guess}, which is not a number. Try again.")
             continue
         
-        guess_proximity = abs(user_guess - number_to_guess)
+        guess_proximity = user_guess - number_to_guess
         if guess_proximity == 0:
             print(f"Congrats!!! \nYou guessed '{number_to_guess}' in {attempts} attempts!")
             break
-        elif guess_proximity <= super_close_proximity:
-            if user_guess < number_to_guess:
+        
+        if abs(guess_proximity) <= super_close_proximity:
+            if guess_proximity < 0:
                 print(super_close_message.format("low"))
             else:
                 print(super_close_message.format("high"))
-        elif guess_proximity <= close_proximity:
-            if user_guess < number_to_guess:
+        elif abs(guess_proximity) <= close_proximity:
+            if guess_proximity < 0:
                 print(close_message.format("low"))
             else:
                 print(close_message.format("high"))
         else:
-            if user_guess < number_to_guess:
+            if guess_proximity < 0:
                 print(far_away_message.format("low"))
             else:
                 print(far_away_message.format("high"))
