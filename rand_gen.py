@@ -5,9 +5,13 @@ def number_guessing_game(min: int, max: int):
     print("Welcome to the number game :)")
     print(f"Enter a number between {min} and {max}!")
 
+    # Define game constants
     number_to_guess = random.randint(min, max)
-    attempts = 0
+    super_close_message = "SUPER CLOSE! But still too {0}"
+    close_message = "Close, but still too {0}!"
+    far_away_message = "Wayyy too {0}"
 
+    attempts = 0
     while True:
         attempts += 1
         user_guess = input("Enter your guess:")
@@ -23,19 +27,19 @@ def number_guessing_game(min: int, max: int):
             break
         elif abs(user_guess - number_to_guess) <= 10:
             if user_guess < number_to_guess:
-                print("SUPER CLOSE! But still too low")
+                print(super_close_message.format("low"))
             else:
-                print("SUPER CLOSE! But still too high")
+                print(super_close_message.format("high"))
         elif abs(user_guess - number_to_guess) <= 100:
             if user_guess < number_to_guess:
-                print("Close, but still too low!")
+                print(close_message.format("low"))
             else:
-                print("Close, but still too high")
+                print(close_message.format("high"))
         else:
             if user_guess < number_to_guess:
-                print("Wayyy too low")
+                print(far_away_message.format("low"))
             else:
-                print("Wayyy too high")
+                print(far_away_message.format("high"))
 
     play_again = input("Would you like to play again? (y/n): ").lower()
     if play_again[0] == "n":
