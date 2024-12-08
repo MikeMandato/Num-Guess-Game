@@ -1,60 +1,61 @@
 import random
 
-SUPER_CLOSE_MESSAGE = "SUPER CLOSE! But still too {0}"
-SUPER_CLOSE_PROXIMITY = 10
-CLOSE_MESSAGE = "Close, but still too {0}!"
-CLOSE_PROXIMITY = 100
-FAR_AWAY_MESSAGE = "Wayyy too {0}"
 
+class NumberGuessingGame:
 
-def print_proximity_based_message(msg: str, guess_proximity: int) -> None:
-    print(msg.format("low" if guess_proximity < 0 else "high"))
+    __super_close_proximity = 10
+    __close_proximity = 100
 
-def get_game_variables(min: int, max: int):
-    return random.randint(min, max), 0
+    def __init__(self, min: int, max: int):
+        self.min, self.max = min, max
+        self.__reset_game_variables()
+    
+    def play(self) -> None:
+        print("Welcome to the number game :)")
+        print(f"Enter a number between {self.min} and {self.max}!")
 
-def this_is_really_the_end(number_to_guess, attempts) -> bool:
-    print(f"Congrats!!! \nYou guessed '{number_to_guess}' in {attempts} attempts!")
-    play_again = input("Would you like to play again? (y/n): ").lower()
-    if play_again[0] == "n":
-        print("\nThanks for playing!\n")
-        return True
-    return False
+        while True:
+            self.attempts += 1
+            user_guess = input("Enter your guess:")
 
-def handle_guess_proximity_message(guess_proximity: str) -> None:
-    if abs(guess_proximity) <= SUPER_CLOSE_PROXIMITY:
-        print_proximity_based_message(SUPER_CLOSE_MESSAGE, guess_proximity)
-    elif abs(guess_proximity) <= CLOSE_PROXIMITY:
-        print_proximity_based_message(CLOSE_MESSAGE, guess_proximity)
-    else:
-        print_proximity_based_message(FAR_AWAY_MESSAGE, guess_proximity)
+            if user_guess.isnumeric():
+                user_guess = int(user_guess)
+            else:
+                print(f"Ooops, you entered {user_guess}, which is not a number. Try again.")
+                continue
+            
+            guess_proximity = user_guess - self.number_to_guess
+            if guess_proximity != 0:
+                self.__handle_guess_proximity_message(guess_proximity)
+                continue
 
-def number_guessing_game(min: int, max: int) -> None:
-    print("Welcome to the number game :)")
-    print(f"Enter a number between {min} and {max}!")
+            if self.__this_is_really_the_end():
+                return
+            
+            self.__reset_game_variables()
 
-    number_to_guess, attempts = get_game_variables(min, max)
+    def __reset_game_variables(self):
+        self.attempts = 0
+        self.number_to_guess = random.randint(self.min, self.max)
 
-    while True:
-        attempts += 1
-        user_guess = input("Enter your guess:")
+    def __this_is_really_the_end(self) -> bool:
+        print(f"Congrats!!! \nYou guessed '{self.number_to_guess}' in {self.attempts} attempts!")
+        play_again = input("Would you like to play again? (y/n): ").lower()
+        if play_again[0] == "n":
+            print("\nThanks for playing!\n")
+            return True
+        return False
 
-        if user_guess.isnumeric():
-            user_guess = int(user_guess)
+    def __handle_guess_proximity_message(self, guess_proximity: str) -> None:
+        high_or_low = "low" if guess_proximity < 0 else "high"
+        if abs(guess_proximity) <= self.__super_close_proximity:
+            print(f"SUPER CLOSE! But still too {high_or_low}")
+        elif abs(guess_proximity) <= self.__close_proximity:
+            print(f"Close, but still too {high_or_low}!")
         else:
-            print(f"Ooops, you entered {user_guess}, which is not a number. Try again.")
-            continue
-        
-        guess_proximity = user_guess - number_to_guess
-        if guess_proximity != 0:
-            handle_guess_proximity_message(guess_proximity)
-            continue
-
-        if this_is_really_the_end(number_to_guess, attempts):
-            return
-        
-        number_to_guess, attempts = get_game_variables(min, max)
+            print(f"Wayyy too {high_or_low}")
 
 
 if __name__ == "__main__":
-    number_guessing_game(1, 500)
+    coolest_game_ever = NumberGuessingGame(1, 500)
+    coolest_game_ever.play()
