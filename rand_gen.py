@@ -19,9 +19,9 @@ def number_guessing_game(min: int, max: int):
         attempts += 1
         user_guess = input("Enter your guess:")
 
-        try:
+        if user_guess.isnumeric():
             user_guess = int(user_guess)
-        except ValueError:
+        else:
             print(f"Ooops, you entered {user_guess}, which is not a number. Try again.")
             continue
         
