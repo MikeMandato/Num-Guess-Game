@@ -46,13 +46,14 @@ def number_guessing_game(min: int, max: int) -> None:
             continue
         
         guess_proximity = user_guess - number_to_guess
-        if guess_proximity == 0:
-            if this_is_really_the_end(number_to_guess, attempts):
-                return
-            number_to_guess, attempts = get_game_variables(min, max)
+        if guess_proximity != 0:
+            handle_guess_proximity_message(guess_proximity)
             continue
 
-        handle_guess_proximity_message(guess_proximity)
+        if this_is_really_the_end(number_to_guess, attempts):
+            return
+        
+        number_to_guess, attempts = get_game_variables(min, max)
 
 
 #if user_guess != int:
