@@ -7,7 +7,7 @@ def number_guessing_game(min, max):
     print("Welcome to the number game :)")
     print(f"Enter a number between {min} and {max}!")
 
-    number_to_guess = random.randint(1,500) ## How do I set this so that i only have to declare the numbers when I call the function?
+    number_to_guess = random.randint(min, max)
     attempts = 0
 
     while True:
