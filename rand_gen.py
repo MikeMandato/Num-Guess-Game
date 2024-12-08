@@ -4,12 +4,16 @@ import random
 def print_proximity_based_message(msg: str, guess_proximity: int):
     print(msg.format("low" if guess_proximity < 0 else "high"))
 
+def get_game_variables(min: int, max: int):
+    return random.randint(min, max), 0
+
 def number_guessing_game(min: int, max: int):
     print("Welcome to the number game :)")
     print(f"Enter a number between {min} and {max}!")
 
+    number_to_guess, attempts = get_game_variables(min, max)
+
     # Define game constants
-    number_to_guess, attempts = random.randint(min, max), 0
     super_close_message, super_close_proximity = "SUPER CLOSE! But still too {0}", 10
     close_message, close_proximity = "Close, but still too {0}!", 100
     far_away_message = "Wayyy too {0}"
@@ -31,7 +35,7 @@ def number_guessing_game(min: int, max: int):
             if play_again[0] == "n":
                 print("\nThanks for playing!\n")
                 return
-            number_to_guess, attempts = random.randint(min, max), 0
+            number_to_guess, attempts = get_game_variables(min, max)
             continue
         
         if abs(guess_proximity) <= super_close_proximity:
