@@ -7,8 +7,8 @@ def number_guessing_game(min: int, max: int):
 
     # Define game constants
     number_to_guess = random.randint(min, max)
-    super_close_message = "SUPER CLOSE! But still too {0}"
-    close_message = "Close, but still too {0}!"
+    super_close_message, super_close_proximity = "SUPER CLOSE! But still too {0}", 10
+    close_message, close_proximity = "Close, but still too {0}!", 100
     far_away_message = "Wayyy too {0}"
 
     attempts = 0
@@ -26,12 +26,12 @@ def number_guessing_game(min: int, max: int):
         if guess_proximity == 0:
             print(f"Congrats!!! \nYou guessed '{number_to_guess}' in {attempts} attempts!")
             break
-        elif guess_proximity <= 10:
+        elif guess_proximity <= super_close_proximity:
             if user_guess < number_to_guess:
                 print(super_close_message.format("low"))
             else:
                 print(super_close_message.format("high"))
-        elif guess_proximity <= 100:
+        elif guess_proximity <= close_proximity:
             if user_guess < number_to_guess:
                 print(close_message.format("low"))
             else:
