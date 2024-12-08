@@ -1,9 +1,7 @@
 import random
 
-min = int
-max = int
 
-def number_guessing_game(min, max):
+def number_guessing_game(min: int, max: int):
     print("Welcome to the number game :)")
     print(f"Enter a number between {min} and {max}!")
 
