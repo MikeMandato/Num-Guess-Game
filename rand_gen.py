@@ -40,11 +40,12 @@ class NumberGuessingGame:
 
     def __this_is_really_the_end(self) -> bool:
         print(f"Congrats!!! \nYou guessed '{self.number_to_guess}' in {self.attempts} attempts!")
-        play_again = input("Would you like to play again? (y/n): ").lower()
-        if play_again[0] == "n":
-            print("\nThanks for playing!\n")
-            return True
-        return False
+        while True:
+            play_again = input("Would you like to play again?\nEnter (y)es if so - any other key will exit the game.")
+            if not play_again.lower().startswith("y"):
+                print("\nThanks for playing!\n")
+                return True
+            return False
 
     def __handle_guess_proximity_message(self, guess_proximity: str) -> None:
         high_or_low = "low" if guess_proximity < 0 else "high"
