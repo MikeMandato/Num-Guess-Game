@@ -56,11 +56,4 @@ def number_guessing_game(min: int, max: int) -> None:
         number_to_guess, attempts = get_game_variables(min, max)
 
 
-#if user_guess != int:
-#print("""Please enter a NUMBER. 
-#Examples of numbers: 234, 401, 29, 1, 111, 197 
-#Now don't f*ck this up. Enter NUMBER here: """)
-#Could also put part of the print in the input :slight_smile:
-#user_guess = int(input())
-
 number_guessing_game(1, 500)
