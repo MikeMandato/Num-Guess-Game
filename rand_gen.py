@@ -7,7 +7,14 @@ def print_proximity_based_message(msg: str, guess_proximity: int) -> None:
 def get_game_variables(min: int, max: int):
     return random.randint(min, max), 0
 
-def number_guessing_game(min: int, max: int):
+def handle_end_game(number_to_guess, attempts) -> bool:
+    print(f"Congrats!!! \nYou guessed '{number_to_guess}' in {attempts} attempts!")
+    play_again = input("Would you like to play again? (y/n): ").lower()
+    if play_again[0] == "n":
+        print("\nThanks for playing!\n")
+        return False
+    return True
+
 def number_guessing_game(min: int, max: int) -> None:
     print("Welcome to the number game :)")
     print(f"Enter a number between {min} and {max}!")
@@ -31,10 +38,7 @@ def number_guessing_game(min: int, max: int) -> None:
         
         guess_proximity = user_guess - number_to_guess
         if guess_proximity == 0:
-            print(f"Congrats!!! \nYou guessed '{number_to_guess}' in {attempts} attempts!")
-            play_again = input("Would you like to play again? (y/n): ").lower()
-            if play_again[0] == "n":
-                print("\nThanks for playing!\n")
+            if not handle_end_game(number_to_guess, attempts):
                 return
             number_to_guess, attempts = get_game_variables(min, max)
             continue
