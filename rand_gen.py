@@ -65,6 +65,5 @@ def handle_arguments():
     return args.min, args.max
 
 if __name__ == "__main__":
-    min, max = handle_arguments()
-    coolest_game_ever = NumberGuessingGame(min, max)
+    coolest_game_ever = NumberGuessingGame(*handle_arguments())
     coolest_game_ever.play()
