@@ -56,4 +56,5 @@ def number_guessing_game(min: int, max: int) -> None:
         number_to_guess, attempts = get_game_variables(min, max)
 
 
-number_guessing_game(1, 500)
+if __name__ == "__main__":
+    number_guessing_game(1, 500)
