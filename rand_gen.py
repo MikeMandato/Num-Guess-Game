@@ -9,12 +9,11 @@ def number_guessing_game(min: int, max: int):
     print(f"Enter a number between {min} and {max}!")
 
     # Define game constants
-    number_to_guess = random.randint(min, max)
+    number_to_guess, attempts = random.randint(min, max), 0
     super_close_message, super_close_proximity = "SUPER CLOSE! But still too {0}", 10
     close_message, close_proximity = "Close, but still too {0}!", 100
     far_away_message = "Wayyy too {0}"
 
-    attempts = 0
     while True:
         attempts += 1
         user_guess = input("Enter your guess:")
@@ -28,7 +27,12 @@ def number_guessing_game(min: int, max: int):
         guess_proximity = user_guess - number_to_guess
         if guess_proximity == 0:
             print(f"Congrats!!! \nYou guessed '{number_to_guess}' in {attempts} attempts!")
-            break
+            play_again = input("Would you like to play again? (y/n): ").lower()
+            if play_again[0] == "n":
+                print("\nThanks for playing!\n")
+                return
+            number_to_guess, attempts = random.randint(min, max), 0
+            continue
         
         if abs(guess_proximity) <= super_close_proximity:
             print_proximity_based_message(super_close_message, guess_proximity)
@@ -36,10 +40,6 @@ def number_guessing_game(min: int, max: int):
             print_proximity_based_message(close_message, guess_proximity)
         else:
             print_proximity_based_message(far_away_message, guess_proximity)
-
-    play_again = input("Would you like to play again? (y/n): ").lower()
-    if play_again[0] == "n":
-        print("\nThanks for playing!\n")
 
 
 #if user_guess != int:
