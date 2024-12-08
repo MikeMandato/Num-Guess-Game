@@ -10,8 +10,9 @@ def number_guessing_game(min: int, max: int):
 
     while True:
         attempts += 1
+        user_guess = input("Enter your guess:")
         try:
-            user_guess = int(input("Enter your guess:"))
+            user_guess = int(user_guess)
         except ValueError:
             print(f"Ooops, you entered {user_guess}, which is not a number. Try again.")
             continue
@@ -38,7 +39,6 @@ def number_guessing_game(min: int, max: int):
     if play_again[0] == "n":
         print("\nThanks for playing!\n")
 
-# Need to fix the problem of a int or incorrect string breaking the loop!
 
 #if user_guess != int:
 #print("""Please enter a NUMBER. 
