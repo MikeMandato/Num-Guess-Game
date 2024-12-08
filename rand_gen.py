@@ -15,7 +15,6 @@ def number_guessing_game(min: int, max: int):
         except ValueError:
             print(f"Ooops, you entered {user_guess}, which is not a number. Try again.")
             continue
-        # What would attempts start at if it was not stated above on line 11?  
         if user_guess == number_to_guess:
             print(f"Congrats!!! \nYou guessed '{number_to_guess}' in {attempts} attempts!")
             break
