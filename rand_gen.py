@@ -11,13 +11,13 @@ def NumGame(min, max):
     attempts = 0
 
     while True:
+        attempts += 1
         try:
             UserGuess = int(input("Enter your guess:"))
         except ValueError:
             print(f"Ooops, you entered {UserGuess}, which is not a number. Try again.")
             continue
         # What would attempts start at if it was not stated above on line 11?  
-        attempts += 1
         if UserGuess == GameInt:
             print(f"Congrats!!! \nYou guessed '{GameInt}' in {attempts} attempts!")
             break
