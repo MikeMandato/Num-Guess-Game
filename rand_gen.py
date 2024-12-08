@@ -1,5 +1,5 @@
 import random
-
+import argparse
 
 class NumberGuessingGame:
 
@@ -57,6 +57,14 @@ class NumberGuessingGame:
             print(f"Wayyy too {high_or_low}")
 
 
+def handle_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--min", type=int, default=1, help="Min number in guess range")
+    parser.add_argument("--max", type=int, default=500, help="Max number in guess range")
+    args = parser.parse_args()
+    return args.min, args.max
+
 if __name__ == "__main__":
-    coolest_game_ever = NumberGuessingGame(1, 500)
+    min, max = handle_arguments()
+    coolest_game_ever = NumberGuessingGame(min, max)
     coolest_game_ever.play()
