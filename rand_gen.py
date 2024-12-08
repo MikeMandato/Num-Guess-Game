@@ -1,13 +1,14 @@
 import random
 
 
-def print_proximity_based_message(msg: str, guess_proximity: int):
+def print_proximity_based_message(msg: str, guess_proximity: int) -> None:
     print(msg.format("low" if guess_proximity < 0 else "high"))
 
 def get_game_variables(min: int, max: int):
     return random.randint(min, max), 0
 
 def number_guessing_game(min: int, max: int):
+def number_guessing_game(min: int, max: int) -> None:
     print("Welcome to the number game :)")
     print(f"Enter a number between {min} and {max}!")
 
