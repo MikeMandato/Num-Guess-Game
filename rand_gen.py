@@ -11,11 +11,13 @@ def number_guessing_game(min: int, max: int):
     while True:
         attempts += 1
         user_guess = input("Enter your guess:")
+
         try:
             user_guess = int(user_guess)
         except ValueError:
             print(f"Ooops, you entered {user_guess}, which is not a number. Try again.")
             continue
+        
         if user_guess == number_to_guess:
             print(f"Congrats!!! \nYou guessed '{number_to_guess}' in {attempts} attempts!")
             break
