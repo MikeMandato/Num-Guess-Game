@@ -1,6 +1,9 @@
 import random
 
 
+def print_proximity_based_message(msg: str, guess_proximity: int):
+    print(msg.format("low" if guess_proximity < 0 else "high"))
+
 def number_guessing_game(min: int, max: int):
     print("Welcome to the number game :)")
     print(f"Enter a number between {min} and {max}!")
@@ -28,20 +31,11 @@ def number_guessing_game(min: int, max: int):
             break
         
         if abs(guess_proximity) <= super_close_proximity:
-            if guess_proximity < 0:
-                print(super_close_message.format("low"))
-            else:
-                print(super_close_message.format("high"))
+            print_proximity_based_message(super_close_message, guess_proximity)
         elif abs(guess_proximity) <= close_proximity:
-            if guess_proximity < 0:
-                print(close_message.format("low"))
-            else:
-                print(close_message.format("high"))
+            print_proximity_based_message(close_message, guess_proximity)
         else:
-            if guess_proximity < 0:
-                print(far_away_message.format("low"))
-            else:
-                print(far_away_message.format("high"))
+            print_proximity_based_message(far_away_message, guess_proximity)
 
     play_again = input("Would you like to play again? (y/n): ").lower()
     if play_again[0] == "n":
